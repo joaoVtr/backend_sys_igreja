@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMemberRequest;
 use App\Http\Requests\UpdateMemberRequest;
+use App\Http\Resources\MemberResource;
 use App\Models\Member;
 
 class MemberController extends Controller
@@ -15,7 +16,8 @@ class MemberController extends Controller
      */
     public function index()
     {
-        //
+        $members = Member::with('church')->get();
+        return MemberResource::collection($members);
     }
 
     /**
@@ -26,7 +28,9 @@ class MemberController extends Controller
      */
     public function store(StoreMemberRequest $request)
     {
-        //
+        $member = Member::create($request->validated());
+
+        return new MemberResource($member);
     }
 
     /**
@@ -37,7 +41,9 @@ class MemberController extends Controller
      */
     public function show(Member $member)
     {
-        //
+        $data = Member::with('church')->find($member->id);
+
+        return new MemberResource($data);
     }
 
     /**
@@ -49,7 +55,9 @@ class MemberController extends Controller
      */
     public function update(UpdateMemberRequest $request, Member $member)
     {
-        //
+        $member->fill($request->validated())->save();
+
+        return new MemberResource($member);
     }
 
     /**
@@ -60,6 +68,7 @@ class MemberController extends Controller
      */
     public function destroy(Member $member)
     {
-        //
+        Member::destroy($member->id);
+        return response()->json([], 204);
     }
 }

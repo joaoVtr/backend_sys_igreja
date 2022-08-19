@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Church::class)->constrained();
+            $table->foreignIdFor(Church::class)->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->text('name');
             $table->string('cpf')->unique();
             $table->date('birthday');

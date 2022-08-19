@@ -18,7 +18,7 @@ class MemberSeeder extends Seeder
     public function run()
     {
         Member::factory()->count(30)->state(new Sequence(
-            fn ($sequence) => ['church_id' => Church::all()->random()]
+            fn () => ['church_id' => Church::all()->random()]
         ))->create();
     }
 }

@@ -13,7 +13,7 @@ class UpdateChurchRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class UpdateChurchRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['string', 'required'],
+            'address' => ['string', 'required'],
+            'website' => ['string', 'required'],
+            // 'picture' => ['nullable', 'image'],
+            'picture' => ['nullable'],
         ];
     }
 }

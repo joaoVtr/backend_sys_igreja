@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreChurchRequest;
 use App\Http\Requests\UpdateChurchRequest;
+use App\Http\Resources\ChurchResource;
 use App\Models\Church;
+use Illuminate\Support\Facades\Storage;
 
 class ChurchController extends Controller
 {
@@ -15,7 +17,8 @@ class ChurchController extends Controller
      */
     public function index()
     {
-        //
+        $churches = Church::with('members')->get();
+        return ChurchResource::collection($churches);
     }
 
     /**
@@ -26,7 +29,18 @@ class ChurchController extends Controller
      */
     public function store(StoreChurchRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        if ($request->has('picture')) {
+            $file_name = uniqid() . "." . $request->picture->getClientOriginalExtension();
+
+            Storage::putFileAs('images/', $request->picture, $file_name);
+
+            $data['picture'] = 'images/' . $file_name;
+        }
+        $church = Church::create($data);
+
+        return new ChurchResource($church);
     }
 
     /**
@@ -37,7 +51,8 @@ class ChurchController extends Controller
      */
     public function show(Church $church)
     {
-        //
+        $data = Church::with('members')->find($church->id);
+        return new ChurchResource($data);
     }
 
     /**
@@ -49,7 +64,20 @@ class ChurchController extends Controller
      */
     public function update(UpdateChurchRequest $request, Church $church)
     {
-        //
+        $data = $request->validated();
+
+        if ($request->has('picture')) {
+
+            Storage::delete($request->picture->getClientOriginalName());
+
+            $file_name = uniqid() . "." . $request->picture->getClientOriginalExtension();
+
+            Storage::putFileAs('images/', $request->picture, $file_name);
+
+            $data['picture'] = 'images/' . $file_name;
+        }
+        $church->fill($data)->save();
+        return new ChurchResource($data);
     }
 
     /**
@@ -60,6 +88,7 @@ class ChurchController extends Controller
      */
     public function destroy(Church $church)
     {
-        //
+        Church::destroy($church->id);
+        return response()->json([], 204);
     }
 }

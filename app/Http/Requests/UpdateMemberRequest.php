@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class UpdateMemberRequest extends FormRequest
 {
@@ -13,7 +15,7 @@ class UpdateMemberRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +26,39 @@ class UpdateMemberRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'church_id' => [
+                'exists:churches,id',
+                'required'
+            ],
+            'name' => [
+                'required'
+            ],
+            'cpf' => [
+                'required',
+                Rule::unique('members', 'cpf')->ignore(Request::segment(3), 'id')
+            ],
+            'birthday' => [
+                'date',
+                'required'
+            ],
+            'email' => [
+                'required',
+                'email'
+            ],
+            'cell_number' => [
+                'required',
+            ],
+            'street_name' => [
+                'required',
+            ],
+            'city' => [
+                'required'
+            ],
+            'state' => [
+                'required',
+                'min:2',
+                'max:2'
+            ]
         ];
     }
 }

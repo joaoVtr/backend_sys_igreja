@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('name');
             $table->text('address');
             $table->text('website');
-            $table->text('picture');
+            $table->text('picture')->nullable();
             $table->timestamps();
         });
     }
