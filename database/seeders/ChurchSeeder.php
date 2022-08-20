@@ -15,6 +15,6 @@ class ChurchSeeder extends Seeder
      */
     public function run()
     {
-        Church::factory()->count(20)->create();
+        Church::factory()->count(10)->create();
     }
 }

@@ -65,7 +65,6 @@ class ChurchController extends Controller
     public function update(UpdateChurchRequest $request, Church $church)
     {
         $data = $request->validated();
-
         if ($request->has('picture')) {
 
             Storage::delete($request->picture->getClientOriginalName());
@@ -77,7 +76,8 @@ class ChurchController extends Controller
             $data['picture'] = 'images/' . $file_name;
         }
         $church->fill($data)->save();
-        return new ChurchResource($data);
+
+        return new ChurchResource($church);
     }
 
     /**
