@@ -1,4 +1,4 @@
-# Sistema para cadastro de igreja/menbro
+# Sistema para cadastro de igreja/membro
 
 ### Instalação
 
