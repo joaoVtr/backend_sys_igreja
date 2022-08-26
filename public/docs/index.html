@@ -1,0 +1,1858 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Laravel Documentation</title>
+
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../docs/css/theme-default.style.css" media="screen">
+    <link rel="stylesheet" href="../docs/css/theme-default.print.css" media="print">
+
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
+
+    <link rel="stylesheet"
+          href="https://unpkg.com/@highlightjs/cdn-assets@10.7.2/styles/obsidian.min.css">
+    <script src="https://unpkg.com/@highlightjs/cdn-assets@10.7.2/highlight.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jets/0.14.1/jets.min.js"></script>
+
+    <style id="language-style">
+        /* starts out as display none and is replaced with js later  */
+                    body .content .bash-example code { display: none; }
+                    body .content .javascript-example code { display: none; }
+            </style>
+
+    <script>
+        var baseUrl = "http://backend_sys_igreja.test";
+        var useCsrf = Boolean();
+        var csrfUrl = "/sanctum/csrf-cookie";
+    </script>
+    <script src="../docs/js/tryitout-3.36.0.js"></script>
+
+    <script src="../docs/js/theme-default-3.36.0.js"></script>
+
+</head>
+
+<body data-languages="[&quot;bash&quot;,&quot;javascript&quot;]">
+
+<a href="#" id="nav-button">
+    <span>
+        MENU
+        <img src="../docs/images/navbar.png" alt="navbar-image" />
+    </span>
+</a>
+<div class="tocify-wrapper">
+    
+            <div class="lang-selector">
+                                            <button type="button" class="lang-button" data-language-name="bash">bash</button>
+                                            <button type="button" class="lang-button" data-language-name="javascript">javascript</button>
+                    </div>
+    
+    <div class="search">
+        <input type="text" class="search" id="input-search" placeholder="Search">
+    </div>
+
+    <div id="toc">
+                                                                            <ul id="tocify-header-0" class="tocify-header">
+                    <li class="tocify-item level-1" data-unique="introduction">
+                        <a href="#introduction">Introduction</a>
+                    </li>
+                                            
+                                                                    </ul>
+                                                <ul id="tocify-header-1" class="tocify-header">
+                    <li class="tocify-item level-1" data-unique="authenticating-requests">
+                        <a href="#authenticating-requests">Authenticating requests</a>
+                    </li>
+                                            
+                                                </ul>
+                    
+                    <ul id="tocify-header-2" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="church">
+                    <a href="#church">Church</a>
+                </li>
+                                    <ul id="tocify-subheader-church" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="church-GETapi-churches">
+                        <a href="#church-GETapi-churches">Show all churches.</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="church-POSTapi-churches">
+                        <a href="#church-POSTapi-churches">Store a new church.</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="church-GETapi-churches--id-">
+                        <a href="#church-GETapi-churches--id-">Show one church.</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="church-PUTapi-churches--id-">
+                        <a href="#church-PUTapi-churches--id-">Update one church.</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="church-DELETEapi-churches--id-">
+                        <a href="#church-DELETEapi-churches--id-">Delete one church.</a>
+                    </li>
+                                                    </ul>
+                            </ul>
+                    <ul id="tocify-header-3" class="tocify-header">
+                <li class="tocify-item level-1" data-unique="member">
+                    <a href="#member">Member</a>
+                </li>
+                                    <ul id="tocify-subheader-member" class="tocify-subheader">
+                                                    <li class="tocify-item level-2" data-unique="member-GETapi-members">
+                        <a href="#member-GETapi-members">Display a listing of the resource.</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="member-POSTapi-members">
+                        <a href="#member-POSTapi-members">Store a newly created resource in storage.</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="member-GETapi-members--id-">
+                        <a href="#member-GETapi-members--id-">Display the specified resource.</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="member-PUTapi-members--id-">
+                        <a href="#member-PUTapi-members--id-">Update the specified resource in storage.</a>
+                    </li>
+                                    <li class="tocify-item level-2" data-unique="member-DELETEapi-members--id-">
+                        <a href="#member-DELETEapi-members--id-">Remove the specified resource from storage.</a>
+                    </li>
+                                                    </ul>
+                            </ul>
+        
+                        
+            </div>
+
+            <ul class="toc-footer" id="toc-footer">
+                            <li><a href="../docs/collection.json">View Postman collection</a></li>
+                            <li><a href="../docs/openapi.yaml">View OpenAPI spec</a></li>
+                            <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
+                    </ul>
+        <ul class="toc-footer" id="last-updated">
+        <li>Last updated: August 26 2022</li>
+    </ul>
+</div>
+
+<div class="page-wrapper">
+    <div class="dark-box"></div>
+    <div class="content">
+        <h1 id="introduction">Introduction</h1>
+<p>Project to cadastre churches and members, and input member in a church</p>
+<p>This documentation aims to provide all the information you need to work with our API.</p>
+<aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
+You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).</aside>
+<blockquote>
+<p>Base URL</p>
+</blockquote>
+<pre><code class="language-yaml">http://localhost/</code></pre>
+
+        <h1 id="authenticating-requests">Authenticating requests</h1>
+<p>This API is not authenticated.</p>
+
+        <h1 id="church">Church</h1>
+
+    <p>Api for managing churches</p>
+
+            <h2 id="church-GETapi-churches">Show all churches.</h2>
+
+<p>
+</p>
+
+<p><em>Soon will be able to use pagination </em></p>
+
+<span id="example-requests-GETapi-churches">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/churches" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/churches"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-churches">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <pre>
+
+<code class="language-json">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 136,
+            &quot;name&quot;: &quot;Connelly-Hudson&quot;,
+            &quot;address&quot;: &quot;8912 Destiney Estates\nDonnaburgh, IN 44660&quot;,
+            &quot;website&quot;: &quot;http://howe.com/dolores-eaque-velit-laudantium-ex-dicta-in-non-in.html&quot;,
+            &quot;picture&quot;: &quot;/tmp/fakeriwoVGd&quot;
+        },
+        {
+            &quot;id&quot;: 137,
+            &quot;name&quot;: &quot;Erdman LLC&quot;,
+            &quot;address&quot;: &quot;1075 Gonzalo Summit Apt. 478\nLemkeshire, WY 13828-7619&quot;,
+            &quot;website&quot;: &quot;http://www.crona.com/&quot;,
+            &quot;picture&quot;: &quot;/tmp/fakerKgbAui&quot;
+        }
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-churches" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-churches"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-churches"></code></pre>
+</span>
+<span id="execution-error-GETapi-churches" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-churches"></code></pre>
+</span>
+<form id="form-GETapi-churches" data-method="GET"
+      data-path="api/churches"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-churches', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-churches"
+                    onclick="tryItOut('GETapi-churches');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-churches"
+                    onclick="cancelTryOut('GETapi-churches');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-churches" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/churches</code></b>
+        </p>
+                    </form>
+
+            <h2 id="church-POSTapi-churches">Store a new church.</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-churches">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/churches" \
+    --header "Content-Type: multipart/form-data" \
+    --header "Accept: application/json" \
+    --form "name=fugiat" \
+    --form "address=architecto" \
+    --form "website=sed" \
+    --form "picture=@/tmp/phpBD9QYr" </code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/churches"
+);
+
+const headers = {
+    "Content-Type": "multipart/form-data",
+    "Accept": "application/json",
+};
+
+const body = new FormData();
+body.append('name', 'fugiat');
+body.append('address', 'architecto');
+body.append('website', 'sed');
+body.append('picture', document.querySelector('input[name="picture"]').files[0]);
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-churches">
+</span>
+<span id="execution-results-POSTapi-churches" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-churches"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-churches"></code></pre>
+</span>
+<span id="execution-error-POSTapi-churches" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-churches"></code></pre>
+</span>
+<form id="form-POSTapi-churches" data-method="POST"
+      data-path="api/churches"
+      data-authed="0"
+      data-hasfiles="1"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"multipart\/form-data","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-churches', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-churches"
+                    onclick="tryItOut('POSTapi-churches');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-churches"
+                    onclick="cancelTryOut('POSTapi-churches');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-churches" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/churches</code></b>
+        </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>name</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="name"
+               data-endpoint="POSTapi-churches"
+               value="fugiat"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>address</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="address"
+               data-endpoint="POSTapi-churches"
+               value="architecto"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>website</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="website"
+               data-endpoint="POSTapi-churches"
+               value="sed"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>picture</code></b>&nbsp;&nbsp;<small>file</small>     <i>optional</i> &nbsp;
+                <input type="file"
+               name="picture"
+               data-endpoint="POSTapi-churches"
+               value=""
+               data-component="body" hidden>
+    <br>
+<p>Must be an image.</p>
+        </p>
+        </form>
+
+            <h2 id="church-GETapi-churches--id-">Show one church.</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-churches--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/churches/1" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/churches/1"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-churches--id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 59
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;name&quot;: &quot;Kunde Inc&quot;,
+        &quot;address&quot;: &quot;515 Grace Land\nBradlyhaven, VA 85463&quot;,
+        &quot;website&quot;: &quot;http://nader.com/mollitia-error-repudiandae-facilis-eos&quot;,
+        &quot;picture&quot;: &quot;/tmp/fakerjgIdOg&quot;,
+        &quot;members&quot;: [
+            {
+                &quot;id&quot;: 8,
+                &quot;church_id&quot;: 1,
+                &quot;name&quot;: &quot;Nya Wehner II&quot;,
+                &quot;cpf&quot;: &quot;393.888.431-52&quot;,
+                &quot;birthday&quot;: &quot;20/07/1974&quot;,
+                &quot;email&quot;: &quot;smcglynn@example.org&quot;,
+                &quot;cell_number&quot;: &quot;(94)41116-3612&quot;,
+                &quot;street_name&quot;: &quot;Cindy Lock&quot;,
+                &quot;city&quot;: &quot;Neomashire&quot;,
+                &quot;state&quot;: &quot;HU&quot;
+            }
+        ]
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-churches--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-churches--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-churches--id-"></code></pre>
+</span>
+<span id="execution-error-GETapi-churches--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-churches--id-"></code></pre>
+</span>
+<form id="form-GETapi-churches--id-" data-method="GET"
+      data-path="api/churches/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-churches--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-churches--id-"
+                    onclick="tryItOut('GETapi-churches--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-churches--id-"
+                    onclick="cancelTryOut('GETapi-churches--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-churches--id-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/churches/{id}</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="id"
+               data-endpoint="GETapi-churches--id-"
+               value="1"
+               data-component="url" hidden>
+    <br>
+<p>The ID of the church.</p>
+            </p>
+                    </form>
+
+            <h2 id="church-PUTapi-churches--id-">Update one church.</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-PUTapi-churches--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "http://localhost/api/churches/1" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"name\": \"Igreja N2\",
+    \"address\": \"non\",
+    \"website\": \"expedita\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/churches/1"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "name": "Igreja N2",
+    "address": "non",
+    "website": "expedita"
+};
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-churches--id-">
+</span>
+<span id="execution-results-PUTapi-churches--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-churches--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-churches--id-"></code></pre>
+</span>
+<span id="execution-error-PUTapi-churches--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-churches--id-"></code></pre>
+</span>
+<form id="form-PUTapi-churches--id-" data-method="PUT"
+      data-path="api/churches/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-churches--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-churches--id-"
+                    onclick="tryItOut('PUTapi-churches--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-churches--id-"
+                    onclick="cancelTryOut('PUTapi-churches--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-churches--id-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/churches/{id}</code></b>
+        </p>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/churches/{id}</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="id"
+               data-endpoint="PUTapi-churches--id-"
+               value="1"
+               data-component="url" hidden>
+    <br>
+<p>The ID of Church.</p>
+            </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>name</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="name"
+               data-endpoint="PUTapi-churches--id-"
+               value="Igreja N2"
+               data-component="body" hidden>
+    <br>
+<p>The name of church.</p>
+        </p>
+                <p>
+            <b><code>address</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="address"
+               data-endpoint="PUTapi-churches--id-"
+               value="non"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>website</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="website"
+               data-endpoint="PUTapi-churches--id-"
+               value="expedita"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>picture</code></b>&nbsp;&nbsp;<small>string</small>     <i>optional</i> &nbsp;
+                <input type="text"
+               name="picture"
+               data-endpoint="PUTapi-churches--id-"
+               value=""
+               data-component="body" hidden>
+    <br>
+
+        </p>
+        </form>
+
+            <h2 id="church-DELETEapi-churches--id-">Delete one church.</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-churches--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "http://localhost/api/churches/1" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/churches/1"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-churches--id-">
+</span>
+<span id="execution-results-DELETEapi-churches--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-churches--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-churches--id-"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-churches--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-churches--id-"></code></pre>
+</span>
+<form id="form-DELETEapi-churches--id-" data-method="DELETE"
+      data-path="api/churches/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-churches--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-churches--id-"
+                    onclick="tryItOut('DELETEapi-churches--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-churches--id-"
+                    onclick="cancelTryOut('DELETEapi-churches--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-churches--id-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/churches/{id}</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="id"
+               data-endpoint="DELETEapi-churches--id-"
+               value="1"
+               data-component="url" hidden>
+    <br>
+<p>The ID of the church.</p>
+            </p>
+                    </form>
+
+        <h1 id="member">Member</h1>
+
+    
+
+            <h2 id="member-GETapi-members">Display a listing of the resource.</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-members">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/members" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/members"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-members">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 58
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;church_id&quot;: 6,
+            &quot;name&quot;: &quot;Luz Aufderhar&quot;,
+            &quot;cpf&quot;: &quot;735.039.917-12&quot;,
+            &quot;birthday&quot;: &quot;01/06/2003&quot;,
+            &quot;email&quot;: &quot;kpacocha@example.org&quot;,
+            &quot;cell_number&quot;: &quot;(39)12622-1737&quot;,
+            &quot;street_name&quot;: &quot;Martina Rapid&quot;,
+            &quot;city&quot;: &quot;Weimannton&quot;,
+            &quot;state&quot;: &quot;IR&quot;,
+            &quot;church&quot;: {
+                &quot;id&quot;: 6,
+                &quot;name&quot;: &quot;Nader, Hegmann and Gibson&quot;,
+                &quot;address&quot;: &quot;67120 Davis Forge\nNew Osbaldofurt, MI 32760-2281&quot;,
+                &quot;website&quot;: &quot;https://www.ohara.info/voluptas-laudantium-soluta-iusto-voluptatem-recusandae&quot;,
+                &quot;picture&quot;: &quot;/tmp/fakerFb664A&quot;
+            }
+        },
+        {
+            &quot;id&quot;: 2,
+            &quot;church_id&quot;: 10,
+            &quot;name&quot;: &quot;Mr. Larue Bergstrom I&quot;,
+            &quot;cpf&quot;: &quot;380.806.705-13&quot;,
+            &quot;birthday&quot;: &quot;28/03/1976&quot;,
+            &quot;email&quot;: &quot;stuart.weimann@example.net&quot;,
+            &quot;cell_number&quot;: &quot;(21)16035-6405&quot;,
+            &quot;street_name&quot;: &quot;Willis Ferry&quot;,
+            &quot;city&quot;: &quot;New Justusstad&quot;,
+            &quot;state&quot;: &quot;TN&quot;,
+            &quot;church&quot;: {
+                &quot;id&quot;: 10,
+                &quot;name&quot;: &quot;Jones Group&quot;,
+                &quot;address&quot;: &quot;666 Andrew Isle\nWest Erashire, TX 42445&quot;,
+                &quot;website&quot;: &quot;http://pfannerstill.com/&quot;,
+                &quot;picture&quot;: &quot;/tmp/fakerzc1hrS&quot;
+            }
+        },
+        {
+            &quot;id&quot;: 3,
+            &quot;church_id&quot;: 4,
+            &quot;name&quot;: &quot;Telly Grady&quot;,
+            &quot;cpf&quot;: &quot;519.556.149-35&quot;,
+            &quot;birthday&quot;: &quot;26/07/1984&quot;,
+            &quot;email&quot;: &quot;bernhard.myron@example.net&quot;,
+            &quot;cell_number&quot;: &quot;(52)97088-1390&quot;,
+            &quot;street_name&quot;: &quot;Alexys Flat&quot;,
+            &quot;city&quot;: &quot;Kenyaside&quot;,
+            &quot;state&quot;: &quot;GN&quot;,
+            &quot;church&quot;: {
+                &quot;id&quot;: 4,
+                &quot;name&quot;: &quot;Barrows-Cole&quot;,
+                &quot;address&quot;: &quot;784 Trinity Roads\nLake Janiyaton, NJ 38756-7967&quot;,
+                &quot;website&quot;: &quot;https://leannon.net/et-sunt-fugiat-libero-architecto-et-tenetur-ut-laudantium.html&quot;,
+                &quot;picture&quot;: &quot;/tmp/faker3TBO3l&quot;
+            }
+        },
+        {
+            &quot;id&quot;: 4,
+            &quot;church_id&quot;: 9,
+            &quot;name&quot;: &quot;Dr. Otto Fisher Jr.&quot;,
+            &quot;cpf&quot;: &quot;527.165.168-69&quot;,
+            &quot;birthday&quot;: &quot;13/06/2002&quot;,
+            &quot;email&quot;: &quot;adah.huel@example.net&quot;,
+            &quot;cell_number&quot;: &quot;(49)73747-3933&quot;,
+            &quot;street_name&quot;: &quot;Alexandro Rest&quot;,
+            &quot;city&quot;: &quot;West Madelineton&quot;,
+            &quot;state&quot;: &quot;MV&quot;,
+            &quot;church&quot;: {
+                &quot;id&quot;: 9,
+                &quot;name&quot;: &quot;Gerhold-Jones&quot;,
+                &quot;address&quot;: &quot;2161 Bernier Plaza Apt. 716\nGottliebland, MI 10546&quot;,
+                &quot;website&quot;: &quot;https://www.blick.com/voluptatem-ut-inventore-assumenda-et&quot;,
+                &quot;picture&quot;: &quot;/tmp/fakerdBSJOp&quot;
+            }
+        },
+        {
+            &quot;id&quot;: 5,
+            &quot;church_id&quot;: 10,
+            &quot;name&quot;: &quot;Miss Eunice Botsford Jr.&quot;,
+            &quot;cpf&quot;: &quot;902.509.002-84&quot;,
+            &quot;birthday&quot;: &quot;18/03/1987&quot;,
+            &quot;email&quot;: &quot;henri56@example.org&quot;,
+            &quot;cell_number&quot;: &quot;(97)71956-0662&quot;,
+            &quot;street_name&quot;: &quot;Walker Road&quot;,
+            &quot;city&quot;: &quot;VonRuedenhaven&quot;,
+            &quot;state&quot;: &quot;GG&quot;,
+            &quot;church&quot;: {
+                &quot;id&quot;: 10,
+                &quot;name&quot;: &quot;Jones Group&quot;,
+                &quot;address&quot;: &quot;666 Andrew Isle\nWest Erashire, TX 42445&quot;,
+                &quot;website&quot;: &quot;http://pfannerstill.com/&quot;,
+                &quot;picture&quot;: &quot;/tmp/fakerzc1hrS&quot;
+            }
+        },
+        {
+            &quot;id&quot;: 6,
+            &quot;church_id&quot;: 6,
+            &quot;name&quot;: &quot;Andreanne Lind&quot;,
+            &quot;cpf&quot;: &quot;520.267.237-52&quot;,
+            &quot;birthday&quot;: &quot;19/08/2004&quot;,
+            &quot;email&quot;: &quot;boyer.orin@example.net&quot;,
+            &quot;cell_number&quot;: &quot;(06)49808-0284&quot;,
+            &quot;street_name&quot;: &quot;Jaylin Island&quot;,
+            &quot;city&quot;: &quot;Lake Lonnymouth&quot;,
+            &quot;state&quot;: &quot;SG&quot;,
+            &quot;church&quot;: {
+                &quot;id&quot;: 6,
+                &quot;name&quot;: &quot;Nader, Hegmann and Gibson&quot;,
+                &quot;address&quot;: &quot;67120 Davis Forge\nNew Osbaldofurt, MI 32760-2281&quot;,
+                &quot;website&quot;: &quot;https://www.ohara.info/voluptas-laudantium-soluta-iusto-voluptatem-recusandae&quot;,
+                &quot;picture&quot;: &quot;/tmp/fakerFb664A&quot;
+            }
+        },
+        {
+            &quot;id&quot;: 7,
+            &quot;church_id&quot;: 3,
+            &quot;name&quot;: &quot;Al Stoltenberg IV&quot;,
+            &quot;cpf&quot;: &quot;491.750.772-25&quot;,
+            &quot;birthday&quot;: &quot;19/07/2019&quot;,
+            &quot;email&quot;: &quot;yblanda@example.net&quot;,
+            &quot;cell_number&quot;: &quot;(59)63935-9690&quot;,
+            &quot;street_name&quot;: &quot;Orn Parks&quot;,
+            &quot;city&quot;: &quot;Schinnerton&quot;,
+            &quot;state&quot;: &quot;YE&quot;,
+            &quot;church&quot;: {
+                &quot;id&quot;: 3,
+                &quot;name&quot;: &quot;Beier and Sons&quot;,
+                &quot;address&quot;: &quot;315 Magnolia Mills\nLabadieview, MO 35540-9940&quot;,
+                &quot;website&quot;: &quot;http://skiles.org/iusto-accusamus-et-iusto-asperiores&quot;,
+                &quot;picture&quot;: &quot;/tmp/fakerVxnbkL&quot;
+            }
+        },
+        {
+            &quot;id&quot;: 8,
+            &quot;church_id&quot;: 1,
+            &quot;name&quot;: &quot;Nya Wehner II&quot;,
+            &quot;cpf&quot;: &quot;393.888.431-52&quot;,
+            &quot;birthday&quot;: &quot;20/07/1974&quot;,
+            &quot;email&quot;: &quot;smcglynn@example.org&quot;,
+            &quot;cell_number&quot;: &quot;(94)41116-3612&quot;,
+            &quot;street_name&quot;: &quot;Cindy Lock&quot;,
+            &quot;city&quot;: &quot;Neomashire&quot;,
+            &quot;state&quot;: &quot;HU&quot;,
+            &quot;church&quot;: {
+                &quot;id&quot;: 1,
+                &quot;name&quot;: &quot;Kunde Inc&quot;,
+                &quot;address&quot;: &quot;515 Grace Land\nBradlyhaven, VA 85463&quot;,
+                &quot;website&quot;: &quot;http://nader.com/mollitia-error-repudiandae-facilis-eos&quot;,
+                &quot;picture&quot;: &quot;/tmp/fakerjgIdOg&quot;
+            }
+        },
+        {
+            &quot;id&quot;: 9,
+            &quot;church_id&quot;: 2,
+            &quot;name&quot;: &quot;Ms. Amie Heaney&quot;,
+            &quot;cpf&quot;: &quot;796.384.626-09&quot;,
+            &quot;birthday&quot;: &quot;19/08/2020&quot;,
+            &quot;email&quot;: &quot;emelia84@example.com&quot;,
+            &quot;cell_number&quot;: &quot;(28)57290-1544&quot;,
+            &quot;street_name&quot;: &quot;Welch Isle&quot;,
+            &quot;city&quot;: &quot;New Mikeberg&quot;,
+            &quot;state&quot;: &quot;SL&quot;,
+            &quot;church&quot;: {
+                &quot;id&quot;: 2,
+                &quot;name&quot;: &quot;Ebert LLC&quot;,
+                &quot;address&quot;: &quot;995 Lueilwitz View\nReichertton, OH 23755-6114&quot;,
+                &quot;website&quot;: &quot;http://www.daniel.org/tenetur-cum-omnis-fuga-aut-vitae&quot;,
+                &quot;picture&quot;: &quot;/tmp/fakerhDjZFx&quot;
+            }
+        },
+        {
+            &quot;id&quot;: 10,
+            &quot;church_id&quot;: 9,
+            &quot;name&quot;: &quot;Prof. Joana Leuschke III&quot;,
+            &quot;cpf&quot;: &quot;357.105.503-31&quot;,
+            &quot;birthday&quot;: &quot;18/12/2021&quot;,
+            &quot;email&quot;: &quot;darius72@example.net&quot;,
+            &quot;cell_number&quot;: &quot;(44)21045-5247&quot;,
+            &quot;street_name&quot;: &quot;Khalil Spring&quot;,
+            &quot;city&quot;: &quot;New Brennonside&quot;,
+            &quot;state&quot;: &quot;MX&quot;,
+            &quot;church&quot;: {
+                &quot;id&quot;: 9,
+                &quot;name&quot;: &quot;Gerhold-Jones&quot;,
+                &quot;address&quot;: &quot;2161 Bernier Plaza Apt. 716\nGottliebland, MI 10546&quot;,
+                &quot;website&quot;: &quot;https://www.blick.com/voluptatem-ut-inventore-assumenda-et&quot;,
+                &quot;picture&quot;: &quot;/tmp/fakerdBSJOp&quot;
+            }
+        },
+        {
+            &quot;id&quot;: 11,
+            &quot;church_id&quot;: 5,
+            &quot;name&quot;: &quot;Ignatius Moore&quot;,
+            &quot;cpf&quot;: &quot;006.002.669-91&quot;,
+            &quot;birthday&quot;: &quot;09/09/2021&quot;,
+            &quot;email&quot;: &quot;ladarius.bosco@example.com&quot;,
+            &quot;cell_number&quot;: &quot;(15)88805-2021&quot;,
+            &quot;street_name&quot;: &quot;Bosco Meadows&quot;,
+            &quot;city&quot;: &quot;Kohlerside&quot;,
+            &quot;state&quot;: &quot;SO&quot;,
+            &quot;church&quot;: {
+                &quot;id&quot;: 5,
+                &quot;name&quot;: &quot;Frami-Pfannerstill&quot;,
+                &quot;address&quot;: &quot;36383 Nienow Club\nMoenport, SC 58742&quot;,
+                &quot;website&quot;: &quot;https://www.huel.info/sed-vero-eveniet-dolores-ex-et&quot;,
+                &quot;picture&quot;: &quot;/tmp/fakerdRqp3t&quot;
+            }
+        },
+        {
+            &quot;id&quot;: 12,
+            &quot;church_id&quot;: 9,
+            &quot;name&quot;: &quot;Gennaro Kovacek&quot;,
+            &quot;cpf&quot;: &quot;932.276.466-14&quot;,
+            &quot;birthday&quot;: &quot;18/12/2009&quot;,
+            &quot;email&quot;: &quot;humberto.hammes@example.com&quot;,
+            &quot;cell_number&quot;: &quot;(12)13152-0480&quot;,
+            &quot;street_name&quot;: &quot;Javonte Vista&quot;,
+            &quot;city&quot;: &quot;Paucektown&quot;,
+            &quot;state&quot;: &quot;GH&quot;,
+            &quot;church&quot;: {
+                &quot;id&quot;: 9,
+                &quot;name&quot;: &quot;Gerhold-Jones&quot;,
+                &quot;address&quot;: &quot;2161 Bernier Plaza Apt. 716\nGottliebland, MI 10546&quot;,
+                &quot;website&quot;: &quot;https://www.blick.com/voluptatem-ut-inventore-assumenda-et&quot;,
+                &quot;picture&quot;: &quot;/tmp/fakerdBSJOp&quot;
+            }
+        },
+        {
+            &quot;id&quot;: 13,
+            &quot;church_id&quot;: 6,
+            &quot;name&quot;: &quot;Adonis Carroll&quot;,
+            &quot;cpf&quot;: &quot;374.580.676-29&quot;,
+            &quot;birthday&quot;: &quot;03/08/2001&quot;,
+            &quot;email&quot;: &quot;alfonzo.pollich@example.org&quot;,
+            &quot;cell_number&quot;: &quot;(51)03724-7350&quot;,
+            &quot;street_name&quot;: &quot;Emard Valleys&quot;,
+            &quot;city&quot;: &quot;Rippinborough&quot;,
+            &quot;state&quot;: &quot;LK&quot;,
+            &quot;church&quot;: {
+                &quot;id&quot;: 6,
+                &quot;name&quot;: &quot;Nader, Hegmann and Gibson&quot;,
+                &quot;address&quot;: &quot;67120 Davis Forge\nNew Osbaldofurt, MI 32760-2281&quot;,
+                &quot;website&quot;: &quot;https://www.ohara.info/voluptas-laudantium-soluta-iusto-voluptatem-recusandae&quot;,
+                &quot;picture&quot;: &quot;/tmp/fakerFb664A&quot;
+            }
+        },
+        {
+            &quot;id&quot;: 14,
+            &quot;church_id&quot;: 10,
+            &quot;name&quot;: &quot;Eve Miller&quot;,
+            &quot;cpf&quot;: &quot;083.374.427-71&quot;,
+            &quot;birthday&quot;: &quot;06/06/1977&quot;,
+            &quot;email&quot;: &quot;tiffany.russel@example.com&quot;,
+            &quot;cell_number&quot;: &quot;(68)02104-4917&quot;,
+            &quot;street_name&quot;: &quot;Schmidt Burgs&quot;,
+            &quot;city&quot;: &quot;Reingershire&quot;,
+            &quot;state&quot;: &quot;FM&quot;,
+            &quot;church&quot;: {
+                &quot;id&quot;: 10,
+                &quot;name&quot;: &quot;Jones Group&quot;,
+                &quot;address&quot;: &quot;666 Andrew Isle\nWest Erashire, TX 42445&quot;,
+                &quot;website&quot;: &quot;http://pfannerstill.com/&quot;,
+                &quot;picture&quot;: &quot;/tmp/fakerzc1hrS&quot;
+            }
+        },
+        {
+            &quot;id&quot;: 15,
+            &quot;church_id&quot;: 8,
+            &quot;name&quot;: &quot;Garrick McLaughlin&quot;,
+            &quot;cpf&quot;: &quot;177.033.828-43&quot;,
+            &quot;birthday&quot;: &quot;06/07/2020&quot;,
+            &quot;email&quot;: &quot;west.kianna@example.com&quot;,
+            &quot;cell_number&quot;: &quot;(41)05456-7131&quot;,
+            &quot;street_name&quot;: &quot;Quitzon Forks&quot;,
+            &quot;city&quot;: &quot;South Miracletown&quot;,
+            &quot;state&quot;: &quot;ME&quot;,
+            &quot;church&quot;: {
+                &quot;id&quot;: 8,
+                &quot;name&quot;: &quot;Sporer LLC&quot;,
+                &quot;address&quot;: &quot;2510 Mayert Run Suite 922\nLindgrenfurt, SC 09439&quot;,
+                &quot;website&quot;: &quot;http://www.parisian.info/ipsum-quisquam-ducimus-iste-earum-nesciunt&quot;,
+                &quot;picture&quot;: &quot;/tmp/fakerJvLCrC&quot;
+            }
+        },
+        {
+            &quot;id&quot;: 16,
+            &quot;church_id&quot;: 7,
+            &quot;name&quot;: &quot;Jarret Jacobson&quot;,
+            &quot;cpf&quot;: &quot;046.116.882-02&quot;,
+            &quot;birthday&quot;: &quot;30/06/1981&quot;,
+            &quot;email&quot;: &quot;gleichner.mina@example.net&quot;,
+            &quot;cell_number&quot;: &quot;(96)63977-0963&quot;,
+            &quot;street_name&quot;: &quot;Nathanael Isle&quot;,
+            &quot;city&quot;: &quot;Paucekport&quot;,
+            &quot;state&quot;: &quot;TV&quot;,
+            &quot;church&quot;: {
+                &quot;id&quot;: 7,
+                &quot;name&quot;: &quot;Stoltenberg LLC&quot;,
+                &quot;address&quot;: &quot;917 Rashawn Turnpike Suite 176\nWyattside, MT 97502-0999&quot;,
+                &quot;website&quot;: &quot;http://www.nicolas.com/&quot;,
+                &quot;picture&quot;: &quot;/tmp/fakerDmGC7l&quot;
+            }
+        },
+        {
+            &quot;id&quot;: 17,
+            &quot;church_id&quot;: 2,
+            &quot;name&quot;: &quot;Garnet Klocko&quot;,
+            &quot;cpf&quot;: &quot;929.527.666-96&quot;,
+            &quot;birthday&quot;: &quot;24/11/1998&quot;,
+            &quot;email&quot;: &quot;kim22@example.org&quot;,
+            &quot;cell_number&quot;: &quot;(04)28936-3623&quot;,
+            &quot;street_name&quot;: &quot;Mireille Forges&quot;,
+            &quot;city&quot;: &quot;Gutkowskibury&quot;,
+            &quot;state&quot;: &quot;DK&quot;,
+            &quot;church&quot;: {
+                &quot;id&quot;: 2,
+                &quot;name&quot;: &quot;Ebert LLC&quot;,
+                &quot;address&quot;: &quot;995 Lueilwitz View\nReichertton, OH 23755-6114&quot;,
+                &quot;website&quot;: &quot;http://www.daniel.org/tenetur-cum-omnis-fuga-aut-vitae&quot;,
+                &quot;picture&quot;: &quot;/tmp/fakerhDjZFx&quot;
+            }
+        },
+        {
+            &quot;id&quot;: 18,
+            &quot;church_id&quot;: 9,
+            &quot;name&quot;: &quot;Willow Abbott&quot;,
+            &quot;cpf&quot;: &quot;907.300.018-31&quot;,
+            &quot;birthday&quot;: &quot;11/11/1970&quot;,
+            &quot;email&quot;: &quot;amelia.bins@example.org&quot;,
+            &quot;cell_number&quot;: &quot;(45)67358-0506&quot;,
+            &quot;street_name&quot;: &quot;Claude Trace&quot;,
+            &quot;city&quot;: &quot;East Federico&quot;,
+            &quot;state&quot;: &quot;TH&quot;,
+            &quot;church&quot;: {
+                &quot;id&quot;: 9,
+                &quot;name&quot;: &quot;Gerhold-Jones&quot;,
+                &quot;address&quot;: &quot;2161 Bernier Plaza Apt. 716\nGottliebland, MI 10546&quot;,
+                &quot;website&quot;: &quot;https://www.blick.com/voluptatem-ut-inventore-assumenda-et&quot;,
+                &quot;picture&quot;: &quot;/tmp/fakerdBSJOp&quot;
+            }
+        },
+        {
+            &quot;id&quot;: 19,
+            &quot;church_id&quot;: 2,
+            &quot;name&quot;: &quot;Dr. Jarrett Ledner I&quot;,
+            &quot;cpf&quot;: &quot;516.693.588-98&quot;,
+            &quot;birthday&quot;: &quot;04/07/1993&quot;,
+            &quot;email&quot;: &quot;dennis52@example.net&quot;,
+            &quot;cell_number&quot;: &quot;(99)09913-5195&quot;,
+            &quot;street_name&quot;: &quot;Robel Hill&quot;,
+            &quot;city&quot;: &quot;Kathleenshire&quot;,
+            &quot;state&quot;: &quot;GU&quot;,
+            &quot;church&quot;: {
+                &quot;id&quot;: 2,
+                &quot;name&quot;: &quot;Ebert LLC&quot;,
+                &quot;address&quot;: &quot;995 Lueilwitz View\nReichertton, OH 23755-6114&quot;,
+                &quot;website&quot;: &quot;http://www.daniel.org/tenetur-cum-omnis-fuga-aut-vitae&quot;,
+                &quot;picture&quot;: &quot;/tmp/fakerhDjZFx&quot;
+            }
+        },
+        {
+            &quot;id&quot;: 20,
+            &quot;church_id&quot;: 10,
+            &quot;name&quot;: &quot;Chyna Schaefer&quot;,
+            &quot;cpf&quot;: &quot;027.545.025-35&quot;,
+            &quot;birthday&quot;: &quot;14/09/1978&quot;,
+            &quot;email&quot;: &quot;stanton.reinger@example.net&quot;,
+            &quot;cell_number&quot;: &quot;(29)60150-7386&quot;,
+            &quot;street_name&quot;: &quot;Genesis Isle&quot;,
+            &quot;city&quot;: &quot;Medhurstton&quot;,
+            &quot;state&quot;: &quot;NF&quot;,
+            &quot;church&quot;: {
+                &quot;id&quot;: 10,
+                &quot;name&quot;: &quot;Jones Group&quot;,
+                &quot;address&quot;: &quot;666 Andrew Isle\nWest Erashire, TX 42445&quot;,
+                &quot;website&quot;: &quot;http://pfannerstill.com/&quot;,
+                &quot;picture&quot;: &quot;/tmp/fakerzc1hrS&quot;
+            }
+        }
+    ]
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-members" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-members"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-members"></code></pre>
+</span>
+<span id="execution-error-GETapi-members" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-members"></code></pre>
+</span>
+<form id="form-GETapi-members" data-method="GET"
+      data-path="api/members"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-members', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-members"
+                    onclick="tryItOut('GETapi-members');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-members"
+                    onclick="cancelTryOut('GETapi-members');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-members" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/members</code></b>
+        </p>
+                    </form>
+
+            <h2 id="member-POSTapi-members">Store a newly created resource in storage.</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-POSTapi-members">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/members" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"church_id\": \"esse\",
+    \"name\": \"libero\",
+    \"cpf\": \"sint\",
+    \"birthday\": \"2022-08-26T04:41:01\",
+    \"email\": \"ilebsack@example.org\",
+    \"cell_number\": \"iure\",
+    \"street_name\": \"quia\",
+    \"city\": \"officia\",
+    \"state\": \"u\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/members"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "church_id": "esse",
+    "name": "libero",
+    "cpf": "sint",
+    "birthday": "2022-08-26T04:41:01",
+    "email": "ilebsack@example.org",
+    "cell_number": "iure",
+    "street_name": "quia",
+    "city": "officia",
+    "state": "u"
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-POSTapi-members">
+</span>
+<span id="execution-results-POSTapi-members" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-members"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-members"></code></pre>
+</span>
+<span id="execution-error-POSTapi-members" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-members"></code></pre>
+</span>
+<form id="form-POSTapi-members" data-method="POST"
+      data-path="api/members"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-members', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-members"
+                    onclick="tryItOut('POSTapi-members');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-members"
+                    onclick="cancelTryOut('POSTapi-members');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-members" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/members</code></b>
+        </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>church_id</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="church_id"
+               data-endpoint="POSTapi-members"
+               value="esse"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>name</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="name"
+               data-endpoint="POSTapi-members"
+               value="libero"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>cpf</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="cpf"
+               data-endpoint="POSTapi-members"
+               value="sint"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>birthday</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="birthday"
+               data-endpoint="POSTapi-members"
+               value="2022-08-26T04:41:01"
+               data-component="body" hidden>
+    <br>
+<p>Must be a valid date.</p>
+        </p>
+                <p>
+            <b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="email"
+               data-endpoint="POSTapi-members"
+               value="ilebsack@example.org"
+               data-component="body" hidden>
+    <br>
+<p>Must be a valid email address.</p>
+        </p>
+                <p>
+            <b><code>cell_number</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="cell_number"
+               data-endpoint="POSTapi-members"
+               value="iure"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>street_name</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="street_name"
+               data-endpoint="POSTapi-members"
+               value="quia"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>city</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="city"
+               data-endpoint="POSTapi-members"
+               value="officia"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>state</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="state"
+               data-endpoint="POSTapi-members"
+               value="u"
+               data-component="body" hidden>
+    <br>
+<p>Must be at least 2 characters. Must not be greater than 2 characters.</p>
+        </p>
+        </form>
+
+            <h2 id="member-GETapi-members--id-">Display the specified resource.</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-GETapi-members--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/members/1" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/members/1"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-GETapi-members--id-">
+            <blockquote>
+            <p>Example response (200):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 57
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;church_id&quot;: 6,
+        &quot;name&quot;: &quot;Luz Aufderhar&quot;,
+        &quot;cpf&quot;: &quot;735.039.917-12&quot;,
+        &quot;birthday&quot;: &quot;01/06/2003&quot;,
+        &quot;email&quot;: &quot;kpacocha@example.org&quot;,
+        &quot;cell_number&quot;: &quot;(39)12622-1737&quot;,
+        &quot;street_name&quot;: &quot;Martina Rapid&quot;,
+        &quot;city&quot;: &quot;Weimannton&quot;,
+        &quot;state&quot;: &quot;IR&quot;,
+        &quot;church&quot;: {
+            &quot;id&quot;: 6,
+            &quot;name&quot;: &quot;Nader, Hegmann and Gibson&quot;,
+            &quot;address&quot;: &quot;67120 Davis Forge\nNew Osbaldofurt, MI 32760-2281&quot;,
+            &quot;website&quot;: &quot;https://www.ohara.info/voluptas-laudantium-soluta-iusto-voluptatem-recusandae&quot;,
+            &quot;picture&quot;: &quot;/tmp/fakerFb664A&quot;
+        }
+    }
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-members--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-members--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-members--id-"></code></pre>
+</span>
+<span id="execution-error-GETapi-members--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-members--id-"></code></pre>
+</span>
+<form id="form-GETapi-members--id-" data-method="GET"
+      data-path="api/members/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-members--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-members--id-"
+                    onclick="tryItOut('GETapi-members--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-members--id-"
+                    onclick="cancelTryOut('GETapi-members--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-members--id-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/members/{id}</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="id"
+               data-endpoint="GETapi-members--id-"
+               value="1"
+               data-component="url" hidden>
+    <br>
+<p>The ID of the member.</p>
+            </p>
+                    </form>
+
+            <h2 id="member-PUTapi-members--id-">Update the specified resource in storage.</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-PUTapi-members--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request PUT \
+    "http://localhost/api/members/1" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"church_id\": \"nisi\",
+    \"name\": \"asperiores\",
+    \"cpf\": \"aut\",
+    \"birthday\": \"2022-08-26T04:41:01\",
+    \"email\": \"muller.melvina@example.com\",
+    \"cell_number\": \"et\",
+    \"street_name\": \"eum\",
+    \"city\": \"qui\",
+    \"state\": \"\"
+}"
+</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/members/1"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "church_id": "nisi",
+    "name": "asperiores",
+    "cpf": "aut",
+    "birthday": "2022-08-26T04:41:01",
+    "email": "muller.melvina@example.com",
+    "cell_number": "et",
+    "street_name": "eum",
+    "city": "qui",
+    "state": ""
+};
+
+fetch(url, {
+    method: "PUT",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-PUTapi-members--id-">
+</span>
+<span id="execution-results-PUTapi-members--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PUTapi-members--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PUTapi-members--id-"></code></pre>
+</span>
+<span id="execution-error-PUTapi-members--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PUTapi-members--id-"></code></pre>
+</span>
+<form id="form-PUTapi-members--id-" data-method="PUT"
+      data-path="api/members/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PUTapi-members--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PUTapi-members--id-"
+                    onclick="tryItOut('PUTapi-members--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PUTapi-members--id-"
+                    onclick="cancelTryOut('PUTapi-members--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PUTapi-members--id-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-darkblue">PUT</small>
+            <b><code>api/members/{id}</code></b>
+        </p>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/members/{id}</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="id"
+               data-endpoint="PUTapi-members--id-"
+               value="1"
+               data-component="url" hidden>
+    <br>
+<p>The ID of the member.</p>
+            </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>church_id</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="church_id"
+               data-endpoint="PUTapi-members--id-"
+               value="nisi"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>name</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="name"
+               data-endpoint="PUTapi-members--id-"
+               value="asperiores"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>cpf</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="cpf"
+               data-endpoint="PUTapi-members--id-"
+               value="aut"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>birthday</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="birthday"
+               data-endpoint="PUTapi-members--id-"
+               value="2022-08-26T04:41:01"
+               data-component="body" hidden>
+    <br>
+<p>Must be a valid date.</p>
+        </p>
+                <p>
+            <b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="email"
+               data-endpoint="PUTapi-members--id-"
+               value="muller.melvina@example.com"
+               data-component="body" hidden>
+    <br>
+<p>Must be a valid email address.</p>
+        </p>
+                <p>
+            <b><code>cell_number</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="cell_number"
+               data-endpoint="PUTapi-members--id-"
+               value="et"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>street_name</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="street_name"
+               data-endpoint="PUTapi-members--id-"
+               value="eum"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>city</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="city"
+               data-endpoint="PUTapi-members--id-"
+               value="qui"
+               data-component="body" hidden>
+    <br>
+
+        </p>
+                <p>
+            <b><code>state</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="state"
+               data-endpoint="PUTapi-members--id-"
+               value=""
+               data-component="body" hidden>
+    <br>
+<p>Must be at least 2 characters. Must not be greater than 2 characters.</p>
+        </p>
+        </form>
+
+            <h2 id="member-DELETEapi-members--id-">Remove the specified resource from storage.</h2>
+
+<p>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-members--id-">
+<blockquote>Example request:</blockquote>
+
+
+<div class="bash-example">
+    <pre><code class="language-bash">curl --request DELETE \
+    "http://localhost/api/members/1" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre></div>
+
+
+<div class="javascript-example">
+    <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/members/1"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre></div>
+
+</span>
+
+<span id="example-responses-DELETEapi-members--id-">
+</span>
+<span id="execution-results-DELETEapi-members--id-" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-members--id-"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-members--id-"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-members--id-" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-members--id-"></code></pre>
+</span>
+<form id="form-DELETEapi-members--id-" data-method="DELETE"
+      data-path="api/members/{id}"
+      data-authed="0"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-members--id-', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-members--id-"
+                    onclick="tryItOut('DELETEapi-members--id-');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-members--id-"
+                    onclick="cancelTryOut('DELETEapi-members--id-');" hidden>Cancel 🛑
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-members--id-" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/members/{id}</code></b>
+        </p>
+                    <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="id"
+               data-endpoint="DELETEapi-members--id-"
+               value="1"
+               data-component="url" hidden>
+    <br>
+<p>The ID of the member.</p>
+            </p>
+                    </form>
+
+    
+
+        
+    </div>
+    <div class="dark-box">
+                    <div class="lang-selector">
+                                                        <button type="button" class="lang-button" data-language-name="bash">bash</button>
+                                                        <button type="button" class="lang-button" data-language-name="javascript">javascript</button>
+                            </div>
+            </div>
+</div>
+</body>
+</html>

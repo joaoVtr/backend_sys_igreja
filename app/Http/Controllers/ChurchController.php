@@ -8,10 +8,23 @@ use App\Http\Resources\ChurchResource;
 use App\Models\Church;
 use Illuminate\Support\Facades\Storage;
 
+
+/**
+ * @group Church
+ * 
+ * Api for managing churches
+ * @unauthenticated
+ */
+
 class ChurchController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Show all churches.
+     * 
+     * <em>Soon will be able to use pagination </em>
+     * 
+     * @apiResourceCollection App\Http\Resources\ChurchResource
+     * @apiResourceModel App\Models\Church
      *
      * @return \Illuminate\Http\Response
      */
@@ -22,8 +35,9 @@ class ChurchController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a new church.
      *
+     * 
      * @param  \App\Http\Requests\StoreChurchRequest  $request
      * @return \Illuminate\Http\Response
      */
@@ -44,7 +58,7 @@ class ChurchController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Show one church.
      *
      * @param  \App\Models\Church  $church
      * @return \Illuminate\Http\Response
@@ -56,8 +70,11 @@ class ChurchController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
+     * Update one church.
+     * 
+     * @urlParam id integer required The ID of Church.
+     * @bodyParam name string required The name of church. Example: Igreja N2
+     * 
      * @param  \App\Http\Requests\UpdateChurchRequest  $request
      * @param  \App\Models\Church  $church
      * @return \Illuminate\Http\Response
@@ -81,7 +98,7 @@ class ChurchController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete one church.
      *
      * @param  \App\Models\Church  $church
      * @return \Illuminate\Http\Response

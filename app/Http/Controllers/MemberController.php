@@ -7,6 +7,11 @@ use App\Http\Requests\UpdateMemberRequest;
 use App\Http\Resources\MemberResource;
 use App\Models\Member;
 
+/**
+ * @group Member
+ * 
+ */
+
 class MemberController extends Controller
 {
     /**
